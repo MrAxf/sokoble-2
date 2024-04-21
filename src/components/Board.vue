@@ -1,6 +1,7 @@
 <template>
   <figure
-    class="aspect-square h-auto max-h-[50vh] w-auto mx-auto bg-gradient-to-br from-player to-success rounded-xl"
+    ref="boardRef"
+    class="aspect-square h-auto max-h-[50vh] w-auto mx-auto bg-gradient-to-br from-player to-success rounded-xl bg-[var(--progress)%_50%] bg-[length:400%_400%] transition-all"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,6 +30,21 @@ import BoardButton from "./BoardButton.vue";
 import BoardBox from "./BoardBox.vue";
 import BoardPlayer from "./BoardPlayer.vue";
 import { useSokoban } from "../composables/sokoban";
+import { onMounted, ref, watchEffect } from "vue";
+import { animate, type ElementOrSelector } from "motion";
 
-const { level, tiles, boxes, player } = useSokoban();
+const boardRef = ref<HTMLElement | null>(null);
+
+const { level, tiles, boxes, player, progress } = useSokoban();
+
+onMounted(() => {
+  watchEffect(() => {
+    animate(
+      boardRef.value as ElementOrSelector,
+      {
+        backgroundPosition: `${progress.value}% 50%`,
+      }
+    );
+  });
+});
 </script>

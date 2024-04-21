@@ -23,7 +23,10 @@ export function useEntity(postion: ComputedRef<Point>, offset: number = 0) {
           y: postion.value.y + offset,
         },
         {
-          easing: spring(),
+          easing: spring({
+            stiffness: 150,
+            damping: 13,
+          }),
         }
       );
     });
