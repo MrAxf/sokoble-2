@@ -7,6 +7,7 @@ export default {
 		extend: {
 			colors: {
 				'background': 'oklch(var(--background))',
+				'background-alt': 'var(--background-alt)',
 				'foreground': 'oklch(var(--foreground))',
 
 				'muted': 'oklch(var(--muted))',

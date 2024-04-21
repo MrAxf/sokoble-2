@@ -1,7 +1,7 @@
 <template>
-  <section class="flex flex-col h-[70vh] gap-4">
-    <Board />
-    <SokobanControls class="grow " />
+  <section class="flex flex-col h-[calc(100vh-13rem)] justify-between gap-4">
+    <Board class="grow" />
+    <SokobanControls class="" />
   </section>
 </template>
 

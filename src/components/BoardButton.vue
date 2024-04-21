@@ -5,7 +5,7 @@
       :y="props.y"
       width="1"
       height="1"
-      class="fill-background stroke-background stroke-[0.1]"
+      class="fill-background-alt stroke-background-alt stroke-[0.1]"
     />
     <circle
       :cx="props.x + 0.5"

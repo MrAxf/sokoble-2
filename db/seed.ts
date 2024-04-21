@@ -18,10 +18,13 @@ interface ApiLevel {
 
 // https://astro.build/db/seed
 export default async function seed() {
-	// async loop
+	const queryparams = new URLSearchParams({
+		key: import.meta.env.LLOGIC_API_KEY,
+	});
 	for (const collection of collections) {
-		const res = await fetch(`${import.meta.env.LLOGIC_URL}/collections/${collection}`);
+		const res = await fetch(`${import.meta.env.LLOGIC_URL}/collection/${collection}?${queryparams}`);
 		const data: ApiLevel[] = await res.json();
+		
 		const levels = data.map((level) => ({
 			id: level.id,
 			width: level.width,

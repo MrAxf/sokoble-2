@@ -1,6 +1,7 @@
 :root {
   --tint: black;
   --background: 98.42% 0.003 247.86;
+  --background-alt: color-mix(in srgb, oklch(var(--background)), var(--tint) 15%);
   --foreground: 20.77% 0.04 265.75;
 
   --muted: 86.9% 0.02 252.89;
