@@ -1,0 +1,47 @@
+:root {
+  --tint: black;
+  --background: 98.42% 0.003 247.86;
+  --foreground: 20.77% 0.04 265.75;
+
+  --muted: 86.9% 0.02 252.89;
+  --muted-hover: color-mix(in srgb, oklch(var(--muted)), var(--tint) 25%);
+  --muted-active: color-mix(in srgb, oklch(var(--muted)), var(--tint) 50%);
+  --muted-foreground: 20.77% 0.04 265.75;
+
+  --player: 62.3% 0.18 250.85;
+  --player-clear: color-mix(in srgb, oklch(var(--player)), white 50%);
+  --player-dark: color-mix(in srgb, oklch(var(--player)), black 25%);
+
+  --box: 47.62% 0.103 61.91;
+  --box-clear: color-mix(in srgb, oklch(var(--box)), white 50%);
+  --box-dark: color-mix(in srgb, oklch(var(--box)), black 25%);
+
+  --success: 62.71% 0.17 149.21;
+  --success-clear: color-mix(in srgb, oklch(var(--success)), white 50%);
+  --success-dark: color-mix(in srgb, oklch(var(--success)), black 25%);
+}
+
+.dark {
+  --tint: white;
+
+  --background: 20.77% 0.04 265.75;
+  --foreground: 98.42% 0.003 247.86;
+
+  --muted: 37.17% 0.039 257.29;
+  --muted-foreground: 98.42% 0.003 247.86;
+}
+
+body {
+  min-height: 100vh;
+  color: oklch(var(--foreground));
+  background: oklch(var(--background));
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,49 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import BottomNavigation from "../components/BottomNavigation.astro";
+import "../styles/global.css";
+---
+
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  function update() {
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  }
+
+  document.addEventListener("astro:after-swap", update);
+  document.addEventListener("DOMContentLoaded", update);
+
+  window.localStorage.setItem("theme", theme);
+</script>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <ViewTransitions />
+    <title>Sokoble</title>
+  </head>
+  <body>
+    <header class="container mx-auto p-4 text-center">
+      <h1 class="text-4xl font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text">Sokoble</h1>
+    </header>
+    <main class="container mx-auto p-4">
+      <slot />
+    </main>
+    <BottomNavigation />
+  </body>
+</html>

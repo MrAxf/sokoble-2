@@ -1,16 +1,22 @@
 ---
+import { db, Level, count } from 'astro:db';
+import Sokoban from "../components/Sokoban.vue";
+import Layout from "../layouts/Layout.astro";
+import type { Level as ILevel } from "../types";
 
+const data = await db.select({ count: count() }).from(Level);
+console.log(data);
+
+const level: ILevel = {
+  id: 522,
+  height: 7,
+  width: 6,
+  map: "111177104177100111152001100301100111111177",
+  moves: 33,
+  pushes: 8,
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Sokoban level={level} client:load />
+</Layout>
