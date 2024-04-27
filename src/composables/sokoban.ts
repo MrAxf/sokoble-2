@@ -2,13 +2,13 @@ import {
   computed,
   getCurrentInstance,
   inject,
+  onMounted,
   provide,
-  ref,
   type Ref,
 } from "vue";
+import { onKeyStroke, useLocalStorage } from "@vueuse/core";
 import { BoardTile, type Action, type Level, type Direction } from "../types";
 import { canMove, move, parseBoard, undo as boardUndo } from "../utils/sokoban";
-import { onKeyStroke } from "@vueuse/core";
 
 const SOKOBAN_CTX_KEY = "sokoban";
 
@@ -46,6 +46,10 @@ export type SokobanContext = {
 let lastMoveInput: number | null = null;
 let lastUndoInput: number | null = null;
 
+const useStorageConfig = {
+  initOnMounted: true,
+};
+
 export function createSokoban(level: Level) {
   const parsedLevel = parseBoard(level.map, level.width, level.height);
 
@@ -66,8 +70,10 @@ export function createSokoban(level: Level) {
     });
   });
 
-  const player = ref(parsedLevel.player);
-  const boxes = ref(parsedLevel.boxes);
+  const levelId = useLocalStorage<number | null>("levelId", -1, useStorageConfig);
+
+  const player = useLocalStorage("player", parsedLevel.player, useStorageConfig);
+  const boxes = useLocalStorage("boxes", parsedLevel.boxes, useStorageConfig);
   const progress = computed(() => {
     return Math.round(
       (boxes.value.filter((box) => box.isOnButton).length /
@@ -75,10 +81,21 @@ export function createSokoban(level: Level) {
         100
     );
   });
-  const moves = ref(0);
-  const pushes = ref(0);
+  const moves = useLocalStorage("moves", 0, useStorageConfig);
+  const pushes = useLocalStorage("pushes", 0, useStorageConfig);
 
-  const undoStack: Action[] = [];
+  const undoStack = useLocalStorage<Action[]>("undoStack", [], useStorageConfig);
+
+  onMounted(() => {
+    if (levelId.value !== level.id) {
+      levelId.value = level.id;
+      player.value = parsedLevel.player;
+      boxes.value = parsedLevel.boxes;
+      moves.value = 0;
+      pushes.value = 0;
+      undoStack.value = [];
+    }
+  });
 
   function movePlayer(direction: Direction) {
     const currBoard = {
@@ -90,7 +107,7 @@ export function createSokoban(level: Level) {
 
     const { next, hasPushed } = move(currBoard, direction);
 
-    undoStack.push(next.action);
+    undoStack.value.push(next.action);
 
     player.value = next.player;
     boxes.value = next.boxes;
@@ -99,7 +116,7 @@ export function createSokoban(level: Level) {
   }
 
   function undo() {
-    const lastAction = undoStack.pop();
+    const lastAction = undoStack.value.pop();
 
     if (!lastAction) return;
 
@@ -119,7 +136,7 @@ export function createSokoban(level: Level) {
   function restart() {
     player.value = parsedLevel.player;
     boxes.value = parsedLevel.boxes;
-    undoStack.length = 0;
+    undoStack.value = [];
     moves.value = 0;
     pushes.value = 0;
   }

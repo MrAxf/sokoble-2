@@ -29,6 +29,7 @@ export type Action = {
 };
 
 export type Level = {
+  id: number;
   height: number;
   width: number;
   map: string;
