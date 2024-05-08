@@ -1,5 +1,15 @@
 <template>
-  <circle ref="target" r="0.45" class="fill-player invert" :style="initialStyle" />
+  <!-- <circle
+    ref="target"
+    r="0.45"
+    class="fill-player invert"
+    :style="initialStyle"
+  /> -->
+  <circle
+    ref="target"
+    r="0.45"
+    class="fill-player invert"
+  />
 </template>
 
 <script lang="ts" setup>

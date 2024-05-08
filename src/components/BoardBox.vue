@@ -1,5 +1,6 @@
 <template>
-  <g ref="target" :style="initialStyle">
+  <!-- <g ref="target" :style="initialStyle"> -->
+  <g ref="target">
     <rect
       width="1"
       height="1"

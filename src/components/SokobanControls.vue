@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 grow gap-4">
+  <div class="grid grid-cols-3 gap-4">
     <IconButton
       icon="i-heroicons-chevron-up"
       title="Up"

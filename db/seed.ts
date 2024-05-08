@@ -18,6 +18,7 @@ interface ApiLevel {
 
 // https://astro.build/db/seed
 export default async function seed() {
+	// @ts-ignore
 	const environment = import.meta.env ?? process.env;
 	const { LLOGIC_API_KEY, LLOGIC_URL } = environment;
 	

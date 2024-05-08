@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col h-[calc(100vh-13rem)] justify-between gap-4">
+  <section class="flex flex-col h-[calc(100vh-11rem)] md:h-[calc(100vh-13rem)] gap-4">
     <Board class="grow" />
     <div class="flex gap-8 text-xl font-bold">
       <span class="inline-flex">
