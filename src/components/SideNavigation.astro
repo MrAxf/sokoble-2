@@ -1,33 +1,30 @@
 ---
-import BottomNavigationItem from "./BottomNavigationItem.astro";
+import SideNavigationItem from "./SideNavigationItem.astro";
 ---
 
 <nav
-  class:list={[
-    "fixed bottom-0 w-full bg-muted text-muted-foreground shadow-lg z-50",
-    "md:max-w-[30rem] md:start-1/2 md:translate-x-[-50%] md:px-8 md:rounded-lg md:my-4",
-  ]}
+  class="fixed bottom-0 max-h-[30rem] top-1/2 translate-y-[-50%] bg-muted py-4 text-muted-foreground shadow-lg z-50 rounded-lg mx-8 hidden landscape:block"
 >
-  <ul class="flex w-full h-full">
-    <BottomNavigationItem
+  <ul class="flex flex-col w-full h-full">
+    <SideNavigationItem
       label="Play"
       path="/"
       icon="i-heroicons-play"
       activeIcon="i-heroicons-play-16-solid"
     />
-    <BottomNavigationItem
+    <SideNavigationItem
       label="Stats"
       path="/stats"
       icon="i-heroicons-chart-pie"
       activeIcon="i-heroicons-chart-pie-16-solid"
     />
-    <BottomNavigationItem
+    <SideNavigationItem
       label="Help"
       path="/help"
       icon="i-heroicons-question-mark-circle"
       activeIcon="i-heroicons-question-mark-circle-16-solid"
     />
-    <BottomNavigationItem
+    <SideNavigationItem
       label="Config"
       path="/config"
       icon="i-heroicons-cog"

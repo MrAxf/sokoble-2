@@ -1,7 +1,7 @@
 <template>
   <figure
     ref="boardRef"
-    class="aspect-square h-auto max-h-[50vh] w-auto mx-auto bg-gradient-to-br from-player to-success rounded-xl bg-[var(--progress)%_50%] bg-[length:400%_400%] transition-all"
+    class="w-full aspect-square bg-gradient-to-br from-player to-success rounded-xl bg-[var(--progress)%_50%] bg-[length:400%_400%] transition-all overflow-hidden"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

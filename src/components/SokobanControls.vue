@@ -1,15 +1,23 @@
 <template>
   <div class="grid grid-cols-3 gap-4">
     <IconButton
+      icon="i-heroicons-backward"
+      title="Undo"
+      @click="undo()"
+    />
+    <IconButton
       icon="i-heroicons-chevron-up"
       title="Up"
-      class="col-start-2"
       @click="movePlayer('up')"
+    />
+    <IconButton
+      icon="i-heroicons-arrow-path"
+      title="Restart"
+      @click="restart()"
     />
     <IconButton
       icon="i-heroicons-chevron-left"
       title="Left"
-      class="col-start-1"
       @click="movePlayer('left')"
     />
     <IconButton
@@ -30,5 +38,5 @@ import IconButton from "./IconButton.vue";
 
 import { useSokoban } from "../composables/sokoban";
 
-const { movePlayer } = useSokoban();
+const { movePlayer, undo, restart } = useSokoban();
 </script>

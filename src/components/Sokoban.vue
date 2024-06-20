@@ -1,7 +1,12 @@
 <template>
-  <section class="flex flex-col h-[calc(100vh-11rem)] md:h-[calc(100vh-13rem)] gap-4">
-    <Board class="grow" />
-    <div class="flex gap-8 text-xl font-bold">
+  <section
+    class="flex flex-col h-full gap-8"
+  >
+    <Board class="shrink-0 grow-0" />
+
+    <SokobanControls class="grow shrink" />
+
+    <div class="flex gap-8 text-xl font-bold grow-0 shrink-0 overflow-hidden">
       <span class="inline-flex">
         <Counter :count="moves" />
         <span>/{{ level.moves }}</span>
@@ -12,7 +17,6 @@
         <span>/{{ level.pushes }}</span>
       </span>
     </div>
-    <SokobanControls class="" />
   </section>
 </template>
 
@@ -20,7 +24,11 @@
 import Board from "./Board.vue";
 import Counter from "./Counter.vue";
 import SokobanControls from "./SokobanControls.vue";
-import { createSokoban, useSokoban, useSokobanKeyControls } from "../composables/sokoban";
+import {
+  createSokoban,
+  useSokoban,
+  useSokobanKeyControls,
+} from "../composables/sokoban";
 import { type Level } from "../types";
 
 const props = defineProps<{

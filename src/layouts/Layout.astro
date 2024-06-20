@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import BottomNavigation from "../components/BottomNavigation.astro";
+import SideNavigation from "../components/SideNavigation.astro";
 import "../styles/global.css";
 ---
 
@@ -41,9 +41,9 @@ import "../styles/global.css";
     <header class="container mx-auto p-4 text-center">
       <h1 class="text-4xl font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text">Sokoble</h1>
     </header>
-    <main class="container mx-auto p-4">
+    <main class="h-[calc(100vh-4.5rem)] aspect-[9/16] mx-auto max-w-full px-4 pb-4">
       <slot />
     </main>
-    <BottomNavigation />
+    <SideNavigation />
   </body>
 </html>
