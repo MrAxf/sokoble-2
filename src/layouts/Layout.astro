@@ -43,15 +43,18 @@ import "../styles/global.css";
       transition:persist
       class="container mx-auto p-4 text-center flex items-center justify-between"
     >
-      <button id="navigation-open" class="p-2 rounded-full bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors grid place-items-center">
+      <button
+        id="navigation-open"
+        class="p-2 rounded-full bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors grid place-items-center landscape:hidden"
+      >
         <i class="i-heroicons-bars-3 size-6"></i>
       </button>
       <h1
-        class="text-4xl font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text"
+        class="text-4xl text-center grow font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text"
       >
         Sokoble
       </h1>
-      <div class="w-10"></div>
+      <div class="w-10 landscape:hidden"></div>
     </header>
     <main
       class="h-[calc(100vh-4.5rem)] aspect-[9/16] mx-auto max-w-full px-4 pb-4"
@@ -60,7 +63,7 @@ import "../styles/global.css";
     </main>
     <SideNavigation />
     <DialogNavigation />
-    <script type="module" transition:persist >
+    <script type="module" transition:persist>
       const $navigationDialog = document.getElementById("navigation");
       const $navigationOpen = document.getElementById("navigation-open");
 
