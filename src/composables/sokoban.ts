@@ -4,6 +4,7 @@ import {
   inject,
   onMounted,
   provide,
+  type ComputedRef,
   type Ref,
 } from "vue";
 import { onKeyStroke, useLocalStorage } from "@vueuse/core";
@@ -38,6 +39,7 @@ export type SokobanContext = {
   progress: Ref<number>;
   moves: Ref<number>;
   pushes: Ref<number>;
+  score: ComputedRef<number>;
   movePlayer: (direction: Direction) => void;
   undo: () => void;
   restart: () => void;
@@ -70,9 +72,17 @@ export function createSokoban(level: Level) {
     });
   });
 
-  const levelId = useLocalStorage<number | null>("levelId", -1, useStorageConfig);
+  const levelId = useLocalStorage<number | null>(
+    "levelId",
+    -1,
+    useStorageConfig
+  );
 
-  const player = useLocalStorage("player", parsedLevel.player, useStorageConfig);
+  const player = useLocalStorage(
+    "player",
+    parsedLevel.player,
+    useStorageConfig
+  );
   const boxes = useLocalStorage("boxes", parsedLevel.boxes, useStorageConfig);
   const progress = computed(() => {
     return Math.round(
@@ -84,7 +94,20 @@ export function createSokoban(level: Level) {
   const moves = useLocalStorage("moves", 0, useStorageConfig);
   const pushes = useLocalStorage("pushes", 0, useStorageConfig);
 
-  const undoStack = useLocalStorage<Action[]>("undoStack", [], useStorageConfig);
+  const score = computed(() => {
+    return Math.min(
+      Math.round(
+        (level.moves / moves.value) * (level.pushes / pushes.value)**2 * 100
+      ),
+      100
+    );
+  });
+
+  const undoStack = useLocalStorage<Action[]>(
+    "undoStack",
+    [],
+    useStorageConfig
+  );
 
   onMounted(() => {
     if (levelId.value !== level.id) {
@@ -150,6 +173,7 @@ export function createSokoban(level: Level) {
     progress,
     moves,
     pushes,
+    score,
     movePlayer,
     undo,
     restart,

@@ -16,6 +16,10 @@
         <Counter :count="pushes" />
         <span>/{{ level.pushes }}</span>
       </span>
+
+      <span class="inline-flex">
+        <Counter :count="score" />
+      </span>
     </div>
   </section>
 </template>
@@ -36,6 +40,6 @@ const props = defineProps<{
 }>();
 
 createSokoban(props.level);
-const { moves, pushes } = useSokoban();
+const { moves, pushes, score } = useSokoban();
 useSokobanKeyControls();
 </script>

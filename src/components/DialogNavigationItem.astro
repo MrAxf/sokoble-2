@@ -1,0 +1,27 @@
+---
+type Props = {
+  label: string;
+  icon: string;
+  path: string;
+};
+
+const { pathname } = Astro.url;
+const { label, icon, path } = Astro.props;
+---
+
+<li class="relative flex-1 flex-col w-full text-foreground">
+  <a
+    href={path}
+    class="py-2 px-8 flex items-center text-xl gap-4 justify-start bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors"
+  >
+    <i class:list={[icon, "size-16"]}></i>
+    <span class="font-bold">{label}</span>
+  </a>
+  {
+    pathname === path && (
+      <div
+        class="w-1 bg-foreground h-full absolute left-0"
+      />
+    )
+  }
+</li>

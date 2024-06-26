@@ -1,10 +1,11 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import SideNavigation from "../components/SideNavigation.astro";
+import DialogNavigation from "../components/DialogNavigation.astro";
 import "../styles/global.css";
 ---
 
-<script is:inline>
+<script is:inline transition:persist>
   const theme = (() => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
@@ -38,12 +39,34 @@ import "../styles/global.css";
     <title>Sokoble</title>
   </head>
   <body>
-    <header class="container mx-auto p-4 text-center">
-      <h1 class="text-4xl font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text">Sokoble</h1>
+    <header
+      transition:persist
+      class="container mx-auto p-4 text-center flex items-center justify-between"
+    >
+      <button id="navigation-open" class="p-2 rounded-full bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors grid place-items-center">
+        <i class="i-heroicons-bars-3 size-6"></i>
+      </button>
+      <h1
+        class="text-4xl font-bold bg-gradient-to-br from-player-dark via-player to-player-clear text-transparent bg-clip-text"
+      >
+        Sokoble
+      </h1>
+      <div class="w-10"></div>
     </header>
-    <main class="h-[calc(100vh-4.5rem)] aspect-[9/16] mx-auto max-w-full px-4 pb-4">
+    <main
+      class="h-[calc(100vh-4.5rem)] aspect-[9/16] mx-auto max-w-full px-4 pb-4"
+    >
       <slot />
     </main>
     <SideNavigation />
+    <DialogNavigation />
+    <script type="module" transition:persist >
+      const $navigationDialog = document.getElementById("navigation");
+      const $navigationOpen = document.getElementById("navigation-open");
+
+      $navigationOpen.addEventListener("click", () => {
+        $navigationDialog.showModal();
+      });
+    </script>
   </body>
 </html>

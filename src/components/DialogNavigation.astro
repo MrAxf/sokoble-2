@@ -1,0 +1,139 @@
+---
+import DialogNavigationItem from "./DialogNavigationItem.astro";
+---
+
+<dialog
+  transition:persist
+  id="navigation"
+  class:list={[
+    "fixed z-50 max-h-[90dvh] w-[80vw] rounded-lg bg-muted outline outline-2 outline-muted-hover",
+    "backdrop:bg-black/50 backdrop:backdrop-filter backdrop:backdrop-blur-lg",
+  ]}
+>
+  <header class="w-full flex justify-end p-4 text-foreground">
+    <button
+      id="navigation-close"
+      class="p-2 rounded-full bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors grid place-items-center"
+    >
+      <i class="i-heroicons-x-mark size-6"></i>
+    </button>
+  </header>
+  <nav class="w-full">
+    <ul class="flex flex-col w-full h-full py-4">
+      <DialogNavigationItem
+        label="Play"
+        path="/"
+        icon="i-heroicons-play-16-solid"
+      />
+      <DialogNavigationItem
+        label="Stats"
+        path="/stats"
+        icon="i-heroicons-chart-pie-16-solid"
+      />
+      <DialogNavigationItem
+        label="Help"
+        path="/help"
+        icon="i-heroicons-question-mark-circle-16-solid"
+      />
+      <DialogNavigationItem
+        label="Config"
+        path="/config"
+        icon="i-heroicons-cog-16-solid"
+      />
+    </ul>
+  </nav>
+</dialog>
+
+<script type="module" transition:persist>
+  const $navigationDialog = document.getElementById("navigation");
+  const $navigationClose = document.getElementById("navigation-close");
+
+  function closeNavigation() {
+    $navigationDialog.classList.add("closing");
+    function handleAnimationEnd() {
+      $navigationDialog.classList.remove("closing");
+      $navigationDialog.close("dismiss");
+      $navigationDialog.removeEventListener("animationend", handleAnimationEnd);
+    }
+    $navigationDialog.addEventListener("animationend", handleAnimationEnd);
+  }
+
+  $navigationClose.addEventListener("click", () => {
+    closeNavigation();
+  });
+
+  $navigationDialog.addEventListener("click", (event) => {
+    if (event.target === $navigationDialog) {
+      closeNavigation();
+    }
+  });
+
+  $navigationDialog.querySelectorAll("a").forEach(($anchor) => {
+    $anchor.addEventListener("click", () => {
+      closeNavigation();
+    });
+  });
+</script>
+
+<style>
+  @keyframes from-bottom-fade-in {
+    from {
+      transform: translateY(25%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes from-bottom-fade-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(25%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  #navigation {
+    &[open] {
+      &:not(.closing) {
+        animation: from-bottom-fade-in 300ms ease-out forwards;
+
+        &::backdrop {
+          animation: fade-in 300ms ease-out forwards;
+        }
+      }
+
+      &.closing {
+        animation: from-bottom-fade-out 300ms ease-out forwards;
+        pointer-events: none;
+
+        &::backdrop {
+          animation: fade-out 300ms ease-out forwards;
+        }
+      }
+    }
+  }
+</style>

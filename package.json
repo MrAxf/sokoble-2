@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
-    "@astrojs/cloudflare": "^10.4.1",
-    "@astrojs/db": "^0.11.6",
+    "@astrojs/cloudflare": "11.0.1",
+    "@astrojs/db": "^0.11.7",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vue": "^4.5.0",
     "@vueuse/core": "^10.11.0",
-    "astro": "^4.11.0",
+    "astro": "^4.11.3",
     "motion": "^10.18.0",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5",
-    "vue": "^3.4.29"
+    "typescript": "^5.5.2",
+    "vue": "^3.4.30"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240614.0",
+    "@cloudflare/workers-types": "^4.20240620.0",
     "@egoist/tailwindcss-icons": "^1.8.1",
     "@iconify-json/heroicons": "^1.1.21"
   }

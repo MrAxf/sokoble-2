@@ -11,7 +11,10 @@ const { label, icon, activeIcon, path } = Astro.props;
 ---
 
 <li class="relative flex-1 grid w-24">
-  <a href={path} class="p-2 flex flex-col items-center text-sm gap-1 justify-center bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors">
+  <a
+    href={path}
+    class="p-2 flex flex-col items-center text-sm gap-1 justify-center bg-muted hover:bg-muted-hover active:bg-muted-active transition-colors"
+  >
     <i class:list={[pathname === path ? activeIcon : icon, "size-8"]}></i>
     <span class:list={[pathname === path && "font-bold"]}>{label}</span>
   </a>
